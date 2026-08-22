@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Publish Plugin" type="DotNetFolderPublish" factoryName="Publish to folder">
+    <riderPublish configuration="Debug" platform="Any CPU" target_folder="$USER_HOME$/AppData/Roaming/r2modmanPlus-local/LethalCompany/profiles/Development/BepInEx/plugins" target_framework="netstandard2.1" uuid_high="-2660080951388652202" uuid_low="2434315571455265760">
+      <runtimes>
+        <item value="Portable" />
+      </runtimes>
+    </riderPublish>
+    <method v="2" />
+  </configuration>
+</component>
