@@ -1,7 +1,8 @@
 # InfectionHUD
 
 ## Development Tips
-Use [ScriptEngine](https://github.com/BepInEx/BepInEx.Debug/releases) for hot-reload support, providing great development experience. NO MORE restarting and finding a Cadaver Growth for 10 minutes every code change!
+- Use [ScriptEngine](https://github.com/BepInEx/BepInEx.Debug/releases) for hot-reload support, providing great development experience. NO MORE restarting and finding a Cadaver Growth for 10 minutes every code change!
+- Use the Rider publish configuration to build and copy the mod to the BepInEx plugins folder automatically.
 
 ### IMPORTANT NOTE:
 This is not documented anywhere, I had to waste a Saturday for this, but set `HideManagerGameObject = true` in `BepInEx/config/BepInEx.cfg`
