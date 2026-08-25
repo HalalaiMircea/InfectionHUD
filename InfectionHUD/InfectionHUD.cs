@@ -2,6 +2,7 @@ using System.Reflection;
 using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
+using UnityEngine.InputSystem;
 
 namespace InfectionHUD;
 
@@ -39,6 +40,16 @@ public class InfectionHUD : BaseUnityPlugin
         }
     }
 
+#if DEBUG
+    private void Update()
+    {
+        if (Keyboard.current.f7Key.wasPressedThisFrame)
+        {
+            Patches.Patches.InfectionText.text = "<infection_reset_by_f7>";
+        }
+    }
+#endif
+
     // ReSharper disable once UnusedMember.Local
     private void OnDestroy()
     {
@@ -48,7 +59,7 @@ public class InfectionHUD : BaseUnityPlugin
             Logger.LogDebug("Unpatching...");
 
             _harmony?.UnpatchSelf();
-            Destroy(Patches.Patches.InfectionText.gameObject);
+            Destroy(Patches.Patches.InfectionText?.gameObject);
 
             Logger.LogDebug("Finished unpatching!");
         }

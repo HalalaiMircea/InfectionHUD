@@ -15,7 +15,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
-
+<!--TODO: Use these examples of Version automation https://github.com/giosuel/imperium/blob/main/Imperium/Imperium.csproj-->
   <!-- Enable Nullable for better IDE null-checking -->
   <PropertyGroup>
     <Nullable>enable</Nullable>
