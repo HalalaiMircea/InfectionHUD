@@ -15,7 +15,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
-<!--TODO: Use these examples of Version automation https://github.com/giosuel/imperium/blob/main/Imperium/Imperium.csproj-->
+
   <!-- Enable Nullable for better IDE null-checking -->
   <PropertyGroup>
     <Nullable>enable</Nullable>
@@ -28,6 +28,14 @@
       https://nuget.bepinex.dev/v3/index.json
     </RestoreAdditionalProjectSources>
   </PropertyGroup>
+
+  <!--This doesn't work without a pack command, like TCLI-->
+  <ItemGroup>
+    <None Include="$(ProjectDir)../README.md" Pack="true" PackagePath="/"/>
+    <!--    <None Include="$(ProjectDir)../CHANGELOG.md" Pack="true" PackagePath="/"/>-->
+    <!--    <None Include="$(ProjectDir)../assets/icon_256x256.png" Pack="true" PackagePath="assets/"/>-->
+
+  </ItemGroup>
 
   <!-- Embed Debug Symbols for Easier Debugging -->
   <PropertyGroup>
@@ -59,4 +67,33 @@
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all"/>
   </ItemGroup>
+
+  <Target
+          Name="AddGeneratedFile"
+          BeforeTargets="BeforeBuild;CoreCompile"
+          Inputs="$(MSBuildAllProjects)"
+          Outputs="$(IntermediateOutputPath)GeneratedFile.cs">
+    <PropertyGroup>
+      <BepInExPluginGuid Condition="'$(BepInExPluginGuid)' == ''">$(AssemblyName)</BepInExPluginGuid>
+      <BepInExPluginName Condition="'$(BepInExPluginName)' == ''">$(Product)</BepInExPluginName>
+      <BepInExPluginVersion Condition="'$(BepInExPluginVersion)' == ''">$(Version)</BepInExPluginVersion>
+      <GeneratedText><![CDATA[
+namespace $(RootNamespace)
+{
+    internal static class PluginInfo
+    {
+        public const string PLUGIN_GUID = "$(BepInExPluginGuid)"%3B
+        public const string PLUGIN_NAME = "$(BepInExPluginName)"%3B
+        public const string PLUGIN_VERSION = "$(BepInExPluginVersion)"%3B
+    }
+}
+      ]]></GeneratedText>
+      <GeneratedFilePath>$(IntermediateOutputPath)PluginInfo.cs</GeneratedFilePath>
+    </PropertyGroup>
+    <ItemGroup>
+      <Compile Include="$(GeneratedFilePath)"/>
+      <FileWrites Include="$(GeneratedFilePath)"/>
+    </ItemGroup>
+    <WriteLinesToFile Lines="$(GeneratedText)" File="$(GeneratedFilePath)" WriteOnlyWhenDifferent="true" Overwrite="true"/>
+  </Target>
 </Project>

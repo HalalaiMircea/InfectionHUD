@@ -1,6 +1,6 @@
 # InfectionHUD
 
-This mod displays the infection % caused by the Cadaver to the player.
+A mod for displaying the infection percentage of the player caused by the Cadaver.
 It is a client side mod. 
 
 ## Development Tips

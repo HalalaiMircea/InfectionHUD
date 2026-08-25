@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace InfectionHUD;
 
-[BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
+[BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
 public class InfectionHUD : BaseUnityPlugin
 {
     public static InfectionHUD Instance { get; private set; } = null!;
@@ -20,7 +20,7 @@ public class InfectionHUD : BaseUnityPlugin
         Logger = base.Logger;
         Instance = this;
 
-        Logger.LogInfo($"{MyPluginInfo.PLUGIN_GUID} v{MyPluginInfo.PLUGIN_VERSION} has loaded!");
+        Logger.LogInfo($"{PluginInfo.PLUGIN_GUID} v{PluginInfo.PLUGIN_VERSION} has loaded!");
 
         Logger.LogDebug("Patching...");
 
